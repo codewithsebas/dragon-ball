@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 interface Character {
     id: string;
@@ -21,27 +22,36 @@ interface CharacterCardProps {
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character, onFavoriteToggle, isFavorite }) => {
+    const router = useRouter();
     return (
-        <div className='border rounded p-4'>
-            <Image
-                src={character.image}
-                alt={character.name}
-                width={150}
-                height={150}
-                loading="lazy"
-            />
-            <h2>{character.name}</h2>
-            <p>Raza: {character.race}</p>
-            <p>Género: {character.gender}</p>
-            <p>Afiliación: {character.affiliation}</p>
-            <div className='flex items-center gap-3'>
-                <button onClick={onFavoriteToggle} className=" bg-blue-500 text-white rounded px-2 py-1">
-                    {isFavorite ? 'Eliminar de Favoritos' : 'Agregar a Favoritos'}
-                </button>
-                <Link href={`/characters/${character.id}`} className=" bg-blue-500 text-white rounded px-2 py-1">
-                    Detalles
-                </Link>
+        <div onClick={() => router.push(`/characters/${character.id}`)} className='p-3 relative overflow-hidden cursor-pointer rounded-lg group bg-gradient-to-t from-indigo-400 border border-indigo-300 text-white'>
+            <div className='flex flex-col'>
+                <h2 className='font-bold'>{character.name}</h2>
+                <Image
+                    src={character.image}
+                    alt={character.name}
+                    width={150}
+                    height={150}
+                    loading="lazy"
+                    className='w-full sm:max-w-96 h-full max-h-60 min-h-60 p-2 object-contain duration-200 scale-110 group-hover:scale-[1.2]'
+                />
             </div>
+            <div className='pt-3 border-t border-indigo-300 text-sm'>
+                <p>Ki: <b>{character.ki}</b></p>
+                <p>Raza: <b>{character.race}</b></p>
+                <p>Género: <b>{character.gender}</b></p>
+                <p>Afiliación: <b>{character.affiliation}</b></p>
+            </div>
+
+            <div className='w-40 h-40 bg-white/10 absolute -top-14 -left-28 rotate-45 duration-200 group-hover:-left-20 -z-10'></div>
+
+            <button onClick={(e) => {
+                e.stopPropagation();
+                onFavoriteToggle()
+            }} className="rounded absolute top-2 right-2 group text-white">
+                {isFavorite ? (<FaHeart className='duration-200 group-active:scale-110' />) : (<FaRegHeart className='duration-200 group-active:scale-110' />)}
+
+            </button>
         </div>
     );
 };

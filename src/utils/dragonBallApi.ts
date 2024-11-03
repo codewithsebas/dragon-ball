@@ -14,14 +14,4 @@ export const fetchCharacters = async (params: Record<string, string | number>) =
     return response.data;
 };
 
-export const fetchPlanets = async (params: Record<string, string | boolean | null>) => {
-    const response = await api.get(`/planets`, { params }); 
-    return response.data;
-};
-
-export const fetchPlanetsById = async (id: string) => {
-    const response = await api.get(`/planets/${id}`);
-    return response.data;
-};
-
 export default api;

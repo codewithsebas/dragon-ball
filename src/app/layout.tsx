@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Image from "next/image";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,8 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-indigo-500 to-indigo-950`}
       >
+        <Image className="w-full min-h-screen opacity-40 fixed object-cover" src="/background.jpg" alt="Background Dragon Ball" width={1000} height={1000} />
         {children}
       </body>
     </html>

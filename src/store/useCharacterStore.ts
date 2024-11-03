@@ -13,31 +13,23 @@ interface Character {
     affiliation: string;
 }
 
-interface Planet {
-    id: string;
-    name: string;
-    isDestroyed: boolean;
-    description: string;
-    image: string;
-}
-
 // Interfaz del store
 interface CharacterStore {
-    favorites: (Character | Planet)[];
-    addFavorite: (item: Character | Planet) => void;
+    favorites: (Character)[];
+    addFavorite: (item: Character) => void;
     removeFavorite: (id: string | number) => void;
     isFavorite: (id: string | number) => boolean;
 }
 
 // Creación del store
 const useCharacterStore = create<CharacterStore>((set, get) => {
-    const initialFavorites: (Character | Planet)[] = typeof window !== 'undefined'
+    const initialFavorites: (Character)[] = typeof window !== 'undefined'
         ? JSON.parse(localStorage.getItem('favorites') || '[]')
         : [];
 
     return {
         favorites: initialFavorites,
-        addFavorite: (item: Character | Planet) => {
+        addFavorite: (item: Character) => {
             set((state) => {
                 const updatedFavorites = [...state.favorites, item];
                 if (typeof window !== 'undefined') {

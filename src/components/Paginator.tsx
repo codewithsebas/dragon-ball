@@ -23,12 +23,11 @@ const Pagination = ({
   };
 
   return (
-    <div className="mt-10 flex items-center justify-center gap-2">
-      {/* Displays the current page number and buttons to go forward or backward. */}
+    <div className="flex items-center justify-center gap-2 text-white mb-5 sm:m-0">
       <button
         onClick={handlePrevious}
         disabled={currentPage === 1}
-        className={`flex items-center gap-2 rounded-lg p-2 pe-4 duration-200 hover:bg-white/10 ${currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
+        className={`flex items-center gap-2 rounded-lg p-2 pe-4 duration-200 hover:bg-white/20 ${currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
           }`}
       >
         <IoIosArrowBack /> Anterior
@@ -38,11 +37,10 @@ const Pagination = ({
         {currentPage}
       </span>
 
-      {/* Buttons are disabled if you are on the first or last page. */}
       <button
         onClick={handleNext}
         disabled={currentPage === totalPages}
-        className={`flex items-center gap-2 rounded-lg p-2 ps-4 duration-200 hover:bg-white/10 ${totalPages < currentPage ? 'cursor-not-allowed opacity-50' : ''
+        className={`flex items-center gap-2 rounded-lg p-2 ps-4 duration-200 hover:bg-white/20 ${(currentPage === totalPages || totalPages === 0) ? 'cursor-not-allowed opacity-50' : ''
           }`}
       >
         Siguiente
