@@ -16,12 +16,13 @@ interface Character {
 }
 
 interface CharacterCardProps {
+    show: boolean;
     character: Character;
     onFavoriteToggle: () => void;
     isFavorite: boolean;
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({ character, onFavoriteToggle, isFavorite }) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({ show, character, onFavoriteToggle, isFavorite }) => {
     const router = useRouter();
     return (
         <div onClick={() => router.push(`/characters/${character.id}`)} className='p-3 relative overflow-hidden cursor-pointer rounded-lg group bg-gradient-to-t from-indigo-400 border border-indigo-300 text-white'>
@@ -38,9 +39,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onFavoriteTogg
             </div>
             <div className='pt-3 border-t border-indigo-300 text-sm'>
                 <p>Ki: <b>{character.ki}</b></p>
+                {show && (
+                    <p>MaxKi: <b>{character.maxKi}</b></p>
+                )}
                 <p>Raza: <b>{character.race}</b></p>
                 <p>Género: <b>{character.gender}</b></p>
                 <p>Afiliación: <b>{character.affiliation}</b></p>
+                {show && (
+                    <p className='mt-3'>{character.description}</p>
+                )}
             </div>
 
             <div className='w-40 h-40 bg-white/10 absolute -top-14 -left-28 rotate-45 duration-200 group-hover:-left-20 -z-10'></div>

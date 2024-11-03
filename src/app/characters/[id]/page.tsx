@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { fetchCharacterById } from "@/utils/dragonBallApi";
 import { useParams } from "next/navigation";
-import BackButton from "@/components/BackButton";
 import useCharacterStore from "@/store/useCharacterStore";
+import CharacterCard from "@/components/CharacterCard";
+import { LuLoader2 } from "react-icons/lu";
+import BackButton from "@/components/BackButton";
 
 interface CharacterData {
   id: string;
@@ -36,9 +37,7 @@ const Character = () => {
 
   const { addFavorite, removeFavorite, isFavorite } = useCharacterStore();
 
-  const handleFavoriteToggle = () => {
-    if (!character) return;
-
+  const handleFavoriteToggle = (character: CharacterData) => {
     if (isFavorite(character.id)) {
       removeFavorite(character.id);
     } else {
@@ -46,33 +45,23 @@ const Character = () => {
     }
   };
 
-  if (!character) return <div>Cargando personaje...</div>;
+  if (!character) return (
+    <div className="w-full min-h-screen text-white flex items-center justify-center">
+      <p className="flex flex-col gap-3 items-center text-xl">
+        <LuLoader2 className="animate-spin" size={30} />
+        Cargando personaje...</p>
+    </div>
+  );
 
   return (
     <div className="p-4 rounded relative z-10 w-full min-h-screen flex items-center justify-center">
-      <div className="max-w-sm bg-white rounded-lg">
-        <BackButton />
-        <Image
-          src={character.image}
-          alt={character.name}
-          width={150}
-          height={150}
-          loading="lazy"
-        />
-        <h2>{character.name}</h2>
-        <p>Raza: {character.race}</p>
-        <p>Género: {character.gender}</p>
-        <p>Afiliación: {character.affiliation}</p>
-        <p>Descripción: {character.description}</p>
-        <p>Ki: {character.ki}</p>
-        <p>Máximo Ki: {character.maxKi}</p>
-
-        <button
-          onClick={handleFavoriteToggle}
-          className="mt-2 bg-blue-500 text-white rounded px-2 py-1"
-        >
-          {isFavorite(character.id) ? 'Eliminar de Favoritos' : 'Agregar a Favoritos'}
-        </button>
+      <div className="max-w-sm w-full flex flex-col gap-3">
+        <BackButton title="Volver" link="/" />
+        <CharacterCard
+          show={true}
+          character={character}
+          onFavoriteToggle={() => handleFavoriteToggle(character)}
+          isFavorite={isFavorite(character.id)} />
       </div>
     </div>
   );

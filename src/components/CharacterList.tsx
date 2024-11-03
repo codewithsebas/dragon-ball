@@ -32,7 +32,8 @@ const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10'>
       {characters.map((character) => (
-        <CharacterCard 
+        <CharacterCard
+          show={false}
           key={character.id}
           character={character}
           onFavoriteToggle={() => handleFavoriteToggle(character)}

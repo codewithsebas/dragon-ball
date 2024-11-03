@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-indigo-500 to-indigo-950`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-indigo-500 to-indigo-950 min-h-screen h-full`}
       >
         <Image className="w-full min-h-screen opacity-40 fixed object-cover" src="/background.jpg" alt="Background Dragon Ball" width={1000} height={1000} />
         {children}
