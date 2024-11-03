@@ -30,17 +30,27 @@ const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   };
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10'>
-      {characters.map((character) => (
-        <CharacterCard
-          show={false}
-          key={character.id}
-          character={character}
-          onFavoriteToggle={() => handleFavoriteToggle(character)}
-          isFavorite={isFavorite(character.id)}
-        />
-      ))}
-    </div>
+    <>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10'>
+        {characters.map((character) => (
+          <CharacterCard
+            show={false}
+            key={character.id}
+            character={character}
+            onFavoriteToggle={() => handleFavoriteToggle(character)}
+            isFavorite={isFavorite(character.id)}
+          />
+        ))}
+
+
+      </div>
+
+      {characters.length === 0 && (
+        <div className='flex flex-col gap-3 items-center justify-center w-full text-white mb-14'>
+          <p className="flex flex-col gap-3 items-center text-lg">
+             No hay personajes</p>
+        </div>
+      )}</>
   );
 };
 
