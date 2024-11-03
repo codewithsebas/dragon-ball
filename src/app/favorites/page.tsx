@@ -30,7 +30,7 @@ export default function Favorites() {
 
     return (
         <div className="w-full min-h-screen text-white flex flex-col items-center justify-center relative z-10">
-            <div className="max-w-3xl w-full flex flex-col justify-center items-center gap-3 mt-10">
+            <div className="max-w-3xl w-full flex flex-col justify-center items-center gap-3 px-3 sm:mt-10 sm:p-0">
 
                 {favorites.length > 0 && (
                     <>
